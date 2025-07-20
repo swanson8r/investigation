@@ -8,28 +8,30 @@
 
 ```mermaid
  flowchart LR;
+     J((("Start of Investigation")));
      A(["Problem Statement"]);
      B["Observation"];
-     C["Analysis"];
      D{"Validate Problem Statement"};
-     E{"Adjust Problem Statement"};
-     F["Troubleshooting"];
-     G(["Solution Statement"]);
-     H((("End of Investigation")));
-     I((("Start of Investigation")));
+     C["Analysis"];
+     E["Troubleshooting"];
+     F{"Adjust Problem Statement"};
+     H(["Solution Statement"]);
+     I((("End of Investigation")));
+     G{"Problem Solved"};
 
-     I-->A;
+     J-->A;
      A-->B;
      B-->C;
      C-->D;
-     D-->|Accept| F;
-     D-.->|Reject| E;
-     E-.->|Yes| A;
-     E-.->|No| H;
-     F-.->B;
-     F-->G;
-     G-.->B;
-     G-->H;
+     D-->|Accept| E;
+     E-->G;
+     G-->|Yes| H;
+     H-->I;
+     D-.->|Reject| F;
+     F-.->|Yes| A;
+     F-.->|No| I;
+     G-.->|No| C;
+
 ```
 
 # Folders and Contents
