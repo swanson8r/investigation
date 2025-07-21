@@ -1,0 +1,25 @@
+api_key: "***************************636c2"
+apm_config: 
+  apm_non_local_traffic: "true"
+  enabled: true
+  receiver_socket: "/var/run/datadog/apm.socket"
+container_exclude: ["name:datadog-agent"]
+dogstatsd_non_local_traffic: true
+dogstatsd_socket: "/var/run/datadog/dsd.socket"
+env: "api-course"
+jmx_use_container_support: true
+logs_config: 
+  container_collect_all: true
+logs_enabled: true
+proxy: 
+  http: ""
+  https: ""
+  no_proxy: ["169.254.169.254", "100.100.100.200"]
+python_version: "3"
+secret_backend_command_allow_group_exec_perm: true
+security_agent: 
+  internal_profiling: 
+    api_key: "***************************636c2"
+    env: "api-course"
+    site: "datadoghq.com"
+site: "datadoghq.com"
