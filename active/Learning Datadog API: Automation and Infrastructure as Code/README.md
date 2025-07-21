@@ -134,7 +134,7 @@ Available in the IDE, shows 2 services configured. The other container name is `
 3. [Install / Upgrade Docker Agent](https://docs.datadoghq.com/containers/docker/?tab=standard)
    - Note: Run only one Datadog Agent per node to avoid unexpected behavior.
    - Remotely upgrading Agents in containerized environments is not supported.
-4. Check Redis Integration permission groups for doocker agent
-5. Make sure to look in the right place; `lab-host` = `api-course-host` running agent inside the dd-agent container on Ubuntu 22.04 host. Alpine Linux logs are from inside the redis container.
+4. Check Redis Integration permission groups for docker agent
+5. Make sure to look in the right place; `lab-host` = `api-course-host` running agent inside the dd-agent container on Ubuntu 22.04 host. Alpine Linux logs are from inside the redis docker container under `/var/lib/docker/containers/`.
 6. Configure Autodiscovery host logging to capture startup scripts on the linux host. Correlate with existing Container and / or Redis integration for timing
 7. Once the source of autostart has been discovered, exclude the redis container.
