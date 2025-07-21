@@ -1,0 +1,43 @@
+# Copied from Lab: Command Line IDE
+services:
+  dd-agent:
+    image: gcr.io/datadoghq/agent:7.64.2
+    container_name: dd-agent
+    environment:
+      - DD_API_KEY
+      - DD_ENV=api-course
+      - DD_HOSTNAME=api-course-host
+      - DD_APM_NON_LOCAL_TRAFFIC=true
+      - DD_LOGS_ENABLED=true
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DD_CLOUD_PROVIDER_METADATA=[]
+    ports:
+      - "8126:8126"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+  redis:
+    image: redis:7.4.2-alpine
+    container_name: redis-session-cache
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "redis"}]'
+      com.datadoghq.tags.service: 'redis-session-cache'
+      com.datadoghq.tags.version: '7.4.2'
+      com.datadoghq.ad.check_names: '["redisdb"]'
+      com.datadoghq.ad.init_configs: '[{}]'
+      com.datadoghq.ad.instances: '[{"host":"%%host%%", "port":6379}]'
+  stately:
+    image: api-course/stately:1.0
+    container_name: stately
+    depends_on: 
+      - redis
+    environment:
+      - DD_AGENT_HOST=dd-agent
+      - DD_SERVICE=stately-app
+      - DD_VERSION=1.0
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "python"}]'
+    ports:
+      - 80:8000
