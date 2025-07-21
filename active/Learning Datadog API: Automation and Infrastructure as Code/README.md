@@ -65,6 +65,9 @@ Symptoms shared in [Datadog Community Slack](https://chat.datadoghq.com/), [#lea
    -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
    gcr.io/datadoghq/agent:7
   ```
+
+  - poke around in redis container shell
+    `docker exec -it redis-session-cache sh`
   
 ### docker-compose.yml 
 
@@ -89,6 +92,10 @@ Available in the IDE, shows 2 services configured. The other container name is `
 - [Host Logs](https://app.datadoghq.com/logs?saved-view-id=3663814)  `host:api-course-host docker`
   - `2025-07-20 23:48:13 UTC | PROCESS | INFO | (pkg/util/log/log.go:845 in func1) | 1 Features detected from environment: docker`
     - `process: func1`
+ - `2025-07-21 00:59:56 UTC | CORE | INFO | (pkg/logs/launchers/file/launcher.go:325 in startNewTailer) | Starting a new tailer for: /var/lib/docker/containers/41085964b343d21d590f35810b3b12d061c3036c0187e40f41e09b491f60bbcc/41085964b343d21d590f35810b3b12d061c3036c0187e40f41e09b491f60bbcc-json.log (offset: 0, whence: 0) for tailer key /var/lib/docker/containers/41085964b343d21d590f35810b3b12d061c3036c0187e40f41e09b491f60bbcc/41085964b343d21d590f35810b3b12d061c3036c0187e40f41e09b491f60bbcc-json.log/41085964b343d21d590f35810b3b12d061c3036c0187e40f41e09b491f60bbcc`
+ - `2025-07-21 00:59:56 UTC | CORE | INFO | (pkg/logs/tailers/file/tailer_nix.go:30 in setup) | Opening /var/lib/docker/containers/41085964b343d21d590f35810b3b12d061c3036c0187e40f41e09b491f60bbcc/41085964b343d21d590f35810b3b12d061c3036c0187e40f41e09b491f60bbcc-json.log for tailer key /var/lib/docker/containers/41085964b343d21d590f35810b3b12d061c3036c0187e40f41e09b491f60bbcc/41085964b343d21d590f35810b3b12d061c3036c0187e40f41e09b491f60bbcc-json.log/41085964b343d21d590f35810b3b12d061c3036c0187e40f41e09b491f60bbcc`
+   - `dirname:/var/lib/docker/containers/9aecc97b48a7ca3a8e7380af8850e604a7045b24fb6d323993c3da0440d8ed54`
+   - `filename:9aecc97b48a7ca3a8e7380af8850e604a7045b24fb6d323993c3da0440d8ed54-json.log`
 
 #### Integrations
 
