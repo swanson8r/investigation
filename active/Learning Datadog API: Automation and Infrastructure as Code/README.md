@@ -23,11 +23,41 @@ Symptoms shared in [Datadog Community Slack](https://chat.datadoghq.com/), [#lea
 
 Available in the IDE, shows 2 services configured. The other container name is `stately`.
 
+### Datadog UI
+
+#### Infrastructure
+
+- [Live Containers](https://app.datadoghq.com/containers?saved-view-id=3663776) Saved View in Lab account, past 15 minutes
+  - redis-session-cache **UP**
+  - [redis Container > Layers](https://app.datadoghq.com/container-images?query=&inspect=redis%40sha256%3A02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952&multiArchFilter=amd64%2Flinux&panelTab=layers) ([Preview Feature](https://www.datadoghq.com/blog/missing-container-metadata/)
+    - `10. RUN /bin/sh -c mkdir /data && chown redis:redis /data # buildkit`
+    - `13. COPY docker-entrypoint.sh /usr/local/bin/ # buildkit`
+    - `16. CMD ["redis-server"]`
+
+#### Logs
+
+- [Container Logs](https://app.datadoghq.com/logs?saved-view-id=3663810) `host:api-course-host container_name:redis-session-cache`
+  - [Warning](https://app.datadoghq.com/logs?query=host%3Aapi-course-host%20container_name%3Aredis-session-cache&agg_m=count&agg_m_source=base&agg_q=source&agg_q_source=base&agg_t=count&cols=host%2Cservice&event=AwAAAZgqPOjG-83npQAAABhBWmdxUFJkZUFBQ0ZnWlJvRTJnRThRRXIAAAAkZjE5ODJhNDItNjgxNy00MWRjLTgyMTMtNTQzMzVhMTY2YTFkAAAB8A&fromUser=true&messageDisplay=inline&refresh_mode=sliding&saved-view-id=3663810&storage=hot&stream_sort=time%2Cdesc&top_n=10&top_o=top&viz=stream&x_missing=true&from_ts=1753054721244&to_ts=1753055621244&live=true): no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+  - [Notice](https://app.datadoghq.com/logs?query=container_id%3Aae53c4066f561cb95ad1f2d2ba7f5cc5bef305a8d288fed139023ea1c672260e&agg_m=count&agg_m_source=base&agg_t=count&cols=host%2Cservice&event=AwAAAZgqPOjG-83npAAAABhBWmdxUFJkZUFBQ0ZnWlJvRTJnRThRRXEAAAAkZjE5ODJhNDItNjgxNy00MWRjLTgyMTMtNTQzMzVhMTY2YTFkAAAB7Q&fromUser=true&messageDisplay=inline&refresh_mode=sliding&storage=hot&stream_sort=desc&viz=stream&from_ts=1753054582953&to_ts=1753055482953&live=true) Redis version=7.4.2, bits=64, commit=00000000, modified=0, pid=1, just started
+- [Host Logs](https://app.datadoghq.com/logs?saved-view-id=3663814)  `host:api-course-host docker`
+  - `2025-07-20 23:48:13 UTC | PROCESS | INFO | (pkg/util/log/log.go:845 in func1) | 1 Features detected from environment: docker`
+    - `process: func1`
+
+#### Integrations
+- Fleet Automation
+  - [Agent Info](https://app.datadoghq.com/fleet?query=api-course-host&sp=%5B%7B%22p%22%3A%7B%22agentKey%22%3A%22f4217785fd2dbfcd067dab235f1e3713%22%2C%22tab%22%3A%22info%22%7D%2C%22i%22%3A%22fleet_agent-details%22%7D%5D)
+    - `api-course-host`
+    - Version: 7.64.2
+      - Remote Agent Management: Unsupported
+      
+##### Audit Events
+
 ## Hypothesis
 
 1. It is possible an instruqt startup script is executing `docker compose up` and redis-session-cache is coming along for the ride
 
 ## Troubleshooting
 
-1. Configure Autodiscovery host logging to capture startup scripts on the linux host. Correlate with existing Container and / or Redis integration for timing
-2. Once the source of autostart has been discovered, exclude the redis container.
+1. Enable Audit Trail for agent change monitoring
+2. Configure Autodiscovery host logging to capture startup scripts on the linux host. Correlate with existing Container and / or Redis integration for timing
+3. Once the source of autostart has been discovered, exclude the redis container.
