@@ -1,0 +1,24 @@
+# Copied from Agent > Audit Events
+logs_config:
+  container_collect_all: "true"
+cloud_provider_metadata: "[]"
+security_agent:
+  internal_profiling:
+    api_key: "***************************636c2"
+    env: api-course
+env: api-course
+agent_version: 7.64.2
+proxy:
+  no_proxy:
+    - 169.254.169.254
+    - 100.100.100.200
+  http: ""
+  https: ""
+hostname: api-course-host
+secret_backend_command_allow_group_exec_perm: "true"
+api_key: "***************************636c2"
+logs_enabled: "true"
+apm_config:
+  apm_non_local_traffic: "true"
+python_version: "3"
+jmx_use_container_support: true
