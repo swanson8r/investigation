@@ -92,19 +92,27 @@ Available in the IDE, shows 2 services configured. The other container name is `
 
 #### Integrations
 
-- Fleet Automation
-  - [Agent Info](https://app.datadoghq.com/fleet?query=api-course-host&sp=%5B%7B%22p%22%3A%7B%22agentKey%22%3A%22f4217785fd2dbfcd067dab235f1e3713%22%2C%22tab%22%3A%22info%22%7D%2C%22i%22%3A%22fleet_agent-details%22%7D%5D)
-    - `api-course-host`
-    - Linux Agent Version: 7.64.2
-      - Remote Agent Management: Unsupported
-      - (Use the generated Agent installation command to upgrade your Agent to version 7.66+.)
-   - `lab-host.ida5ib5myjmo.svc.cluster.local`
-     - Docker agent
-      
+##### Fleet Automation
+
+- [Agent Info](https://app.datadoghq.com/fleet?query=api-course-host&sp=%5B%7B%22p%22%3A%7B%22agentKey%22%3A%22f4217785fd2dbfcd067dab235f1e3713%22%2C%22tab%22%3A%22info%22%7D%2C%22i%22%3A%22fleet_agent-details%22%7D%5D)
+  - `api-course-host`
+  - Linux Agent Version: 7.64.2
+    - Remote Agent Management: Unsupported
+    - (Use the generated Agent installation command to upgrade your Agent to version 7.66+.)
+ - `lab-host.ida5ib5myjmo.svc.cluster.local`
+   - Docker agent
+    
+##### Redis
+
+- log error messages
+  ```bash
+  2025-07-21 01:41:00 UTC | CORE | ERROR | (pkg/collector/worker/check_logger.go:71 in Error) | check:redisdb | Error running check: [{"message":"Timeout connecting to server","traceback":"Traceback (most recent call last): 
+  ```
+
+
 ##### Audit Events
 
 - Agent version was updated to 7.64.2 from 7.68.1
-- 
 
 ## Hypothesis
 
@@ -119,6 +127,7 @@ Available in the IDE, shows 2 services configured. The other container name is `
 3. [Install / Upgrade Docker Agent](https://docs.datadoghq.com/containers/docker/?tab=standard)
    - Note: Run only one Datadog Agent per node to avoid unexpected behavior.
    - Remotely upgrading Agents in containerized environments is not supported.
-4. Make sure to look in the right place; `lab-host` = `api-course-host` running agent inside the dd-agent container on Ubuntu 22.04 host. Alpine Linux logs are from inside the redis container.
-5. Configure Autodiscovery host logging to capture startup scripts on the linux host. Correlate with existing Container and / or Redis integration for timing
-6. Once the source of autostart has been discovered, exclude the redis container.
+4. Check Redis Integration permission groups for doocker agent
+5. Make sure to look in the right place; `lab-host` = `api-course-host` running agent inside the dd-agent container on Ubuntu 22.04 host. Alpine Linux logs are from inside the redis container.
+6. Configure Autodiscovery host logging to capture startup scripts on the linux host. Correlate with existing Container and / or Redis integration for timing
+7. Once the source of autostart has been discovered, exclude the redis container.
