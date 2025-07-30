@@ -1,11 +1,10 @@
-## Notebook
+# datadog-agent OOMKilled CrashLoopBackOff
 
-**datadog-agent OOMKilled CrashLoopBackOff**
+## Notebook
 
 - Container: Memory Usage
 - Top 5 max Container OOM Events - Prod by container name
 ![Timeseries visualization: Top 5 max Container OOM Events - Prod by container name](./Container_OOM_Events.png)
-
 
 ## Queries
 
@@ -24,9 +23,7 @@ source:oom_kill").rollup("count").by("env,dbt_instance,service").last("30m") >= 
 names to monitor tag values (by team in the example, but could be by service)
   - Would either need a map for team to service, OR the datadog teams owner defined in the software catalog
 
-## Dashboard
-
-**Top OOM Kills**
+## Dashboard: Top OOM Kills
 
 ### Template Variables
 
@@ -45,5 +42,4 @@ names to monitor tag values (by team in the example, but could be by service)
 
 - OOM Kill Event Details
 - Warning and Error Log Patterns
-  - for env:* instance:* service:* by Service
-
+  - for `env:* instance:* service:*` by Service

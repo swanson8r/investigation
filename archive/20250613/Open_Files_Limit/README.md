@@ -1,17 +1,17 @@
+# Open Files Limit
+
 ## Notebook
 
 ### Markdown Widget
 
-**Open Files Limit**
-
 - Configured imit is 2,000 parallel tailed logs per agent.
   - The maximum number of files that can be tailed in parallel https://docs.datadoghq.com/agent/logs/?tab=tailfiles
   - <repo>/charts/datadog/values.yaml#L40-L42
-      ```yaml
-      env:
-        - name: DD_LOGS_CONFIG_OPEN_FILES_LIMIT
-          value: '2000'
-      ```
+       ```yaml
+       env:
+         - name: DD_LOGS_CONFIG_OPEN_FILES_LIMIT
+        v  alue: '2000'
+       ```
 - Identifying highest instant volume sources will be helpful in reducing the immediate impact
   - NOTE: Adjust focus to number of FILES across all agents sharing that open file limit, NOT the individual logfile message volume.
 

@@ -1,13 +1,14 @@
-## Notebook
+# Muted Monitor Review
 
-**Muted Monitor Review**
+## Notebook
 
 ### Markdown Widget
 
-** $team Monitors**
+#### $team Monitors
+
 - Production - kube-proxy Replica Availability
   - env is inconsistently populated in KES metrics. pending updated tags or decommission.
-  - <customer env> is right on the 80% threshold
+  - customer env is right on the 80% threshold
 - Production - High Disk Utilization
   - no env group by
   - mostly dev and pr instances impacted
@@ -19,12 +20,12 @@
   - Scope: `instance:dev OR instance:pr OR instance:azure-dev
   - Confirm with $team if this should be baked into the monitor; break out a separate one for dev & pr if needed.
 
-
-** Evaluate 15w downtime for removal **
+#### Evaluate 15w downtime for removal
 
 - NO DATA or Alerting, sorted by Muted Elapsed descending
 
 Sunday, 3/23/25
+
 - Focused on a refined filter on muted monitors since 15 weeks ago, managed by terraform
 - Initial Query only show muted for *at least* this long. We want the opposite.
 - Show a list of all tags being filtered by the downtime exclusion.
@@ -38,6 +39,7 @@ this works to start with (614 results) `-group"dbt_instance:prod*`
 #### Monitor List Search
 
 To further narrow the search, start with the raw list of monitors by tags.
+
 - `muted:true tag:("managed-by:terraform") -tag:("initiative:observability") tag:(domain:*) -ExternalSecrets`
   - returns 96 legacy domain monitors to exclude (recently downtimed by group scope)
 - `tag:"managed-by:terraform" -tag:("initiative:observability") -tag:(domain:*) -ExternalSecrets notification:webhook-incident-io -muted_elapsed:16w muted_elapsed:14w`
