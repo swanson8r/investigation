@@ -4,9 +4,12 @@
 
 ### markdown widget
 
-`#ask-dev-sre` slack thread
-Investigating missing data in the range of Mon Sept 16th 7am ET -> Tues Sept 17th 4am ET
-(Sep 16, 06:00 am – Sep 17, 5:00 am) has ears
+`#ask-dev-sre` slack thread investigating missing data in the range of
+
+- `Mon Sept 16th 7am ET -> Tues Sept 17th 4am ET`
+  - `(Sep 16, 06:00 am – Sep 17, 5:00 am)`
+
+has "ears" of nonimpacting time around the event for comparison against "normal"
 
 ### Timeseries widgets - Line Charts
 
