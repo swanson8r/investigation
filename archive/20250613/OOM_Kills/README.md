@@ -15,7 +15,7 @@ kube_deployment:datadog-agent OOM").rollup("count").by("kube_cluster_name,env").
 
 ```datadog
 events("env:*prod* -kube_deployment:datadog-agent-cluster-agent -kube_deployment:datadog-agent
-source:oom_kill").rollup("count").by("env,dbt_instance,service").last("30m") >= 5
+source:oom_kill").rollup("count").by("env,instance,service").last("30m") >= 5
 ```
 
 - Too noisy for one team; need to alert per owning team by service.

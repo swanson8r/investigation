@@ -34,7 +34,7 @@ Sunday, 3/23/25
   - `group:"instance:*" AND NOT group:"instance:prod*"` returns nothing
   - `group:instance:prod*` (no quotes) returns 55 correct looking triggered anti-patterns.
 
-this works to start with (614 results) `-group"dbt_instance:prod*`
+this works to start with (614 results) `-group"instance:prod*`
 
 #### Monitor List Search
 
